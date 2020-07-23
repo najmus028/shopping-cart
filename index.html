@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="removeButtonPhone" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phoneQuantity" type="text" class="form-control text-center" value="0">
+                           <button id="addButtonPhone" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="phonePrice">0</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="removeCover" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="coverQuantity" type="text" class="form-control text-center" value="0">
+                           <button id="addCover" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$ <span id="coverPrice">0</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="subTotal">0</span></h5>
+                        <h5>$ <span id="taxAmount">0</span></h5>
+                        <h5>$ <span id="totalAmount">0</span> </h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <script>
+      // Add Phone to the cart
+      const addButtonPhone = document.getElementById('addButtonPhone');
+      addButtonPhone.addEventListener('click', function () {
+         const phoneQuantity = document.getElementById('phoneQuantity').value;
+         let totalPhoneQuantity = parseInt(phoneQuantity);
+         totalPhoneQuantity++;
+         document.getElementById('phoneQuantity').value = totalPhoneQuantity;
+
+         if (totalPhoneQuantity < 0) {
+            return totalPhoneQuantity;
+         } 
+         else {
+            const phonePrice = document.getElementById('phonePrice').innerText;
+            const totalPhonePrice = parseInt(phonePrice);
+            const finalPhonePrice = totalPhonePrice + 1219;
+            document.getElementById('phonePrice').innerText = finalPhonePrice;
+
+            const subTotal = document.getElementById('subTotal').innerText;
+            const overallSubTotal = parseInt(subTotal);
+            const finalOverallSubTotal = overallSubTotal + 1219;
+            document.getElementById('subTotal').innerText = finalOverallSubTotal;
+
+            const taxAmount = document.getElementById('taxAmount').innerText;
+            const totalTaxAmount = parseFloat(taxAmount);
+            const finalTaxAmount = finalOverallSubTotal * 0.015;
+            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(3);
+
+            const totalAmount = document.getElementById('totalAmount').innerText;
+            const floatTotal = parseFloat(totalAmount);
+            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
+            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(3);
+         }
+      })
+
+      // remove Phone from the cart
+      const removeButtonPhone = document.getElementById('removeButtonPhone');
+      removeButtonPhone.addEventListener('click', function () {
+         const phoneQuantity = document.getElementById('phoneQuantity').value;
+         let totalPhoneQuantity = parseInt(phoneQuantity);
+         totalPhoneQuantity--;
+         document.getElementById('phoneQuantity').value = (totalPhoneQuantity);
+
+         if (totalPhoneQuantity < 0) {
+            return totalPhoneQuantity;
+         } 
+         else {
+            const phonePrice = document.getElementById('phonePrice').innerText;
+            const totalPhonePrice = parseInt(phonePrice);
+            let finalPhonePrice = totalPhonePrice - 1219;
+            document.getElementById('phonePrice').innerText = finalPhonePrice;
+
+
+            const subTotal = document.getElementById('subTotal').innerText;
+            const overallSubTotal = parseInt(subTotal);
+            const finalOverallSubTotal = overallSubTotal - 1219;
+            document.getElementById('subTotal').innerText = finalOverallSubTotal;
+
+            const taxAmount = document.getElementById('taxAmount').innerText;
+            const totalTaxAmount = parseFloat(taxAmount);
+            const finalTaxAmount = finalOverallSubTotal * 0.015;
+            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
+
+            const totalAmount = document.getElementById('totalAmount').innerText;
+            const floatTotal = parseFloat(totalAmount);
+            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
+            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+         }
+
+      })
+
+      // Add Cover to the cart 
+      const addCover = document.getElementById('addCover');
+      addCover.addEventListener('click', function () {
+         const coverQuantity = document.getElementById('coverQuantity').value;
+         let totalCoverQuantity = parseInt(coverQuantity);
+         totalCoverQuantity++;
+         document.getElementById('coverQuantity').value = totalCoverQuantity;
+
+         if (totalCoverQuantity < 0) {
+            return totalCoverQuantity;
+         } 
+         else {
+            const coverPrice = document.getElementById('coverPrice').innerText;
+            let totalCoverPrice = parseInt(coverPrice);
+            const finalCoverPrice = totalCoverPrice + 59;
+            document.getElementById('coverPrice').innerText = finalCoverPrice;
+
+
+            const subTotal = document.getElementById('subTotal').innerText;
+            const overallSubTotal = parseInt(subTotal);
+            const finalOverallSubTotal = overallSubTotal + 59;
+            document.getElementById('subTotal').innerText = finalOverallSubTotal;
+
+            const taxAmount = document.getElementById('taxAmount').innerText;
+            const totalTaxAmount = parseFloat(taxAmount);
+            const finalTaxAmount = finalOverallSubTotal * 0.015;
+            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
+
+
+            const totalAmount = document.getElementById('totalAmount').innerText;
+            const floatTotal = parseFloat(totalAmount);
+            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
+            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+         }
+      })
+
+      // Remove Cover from the cart 
+      const removeCover = document.getElementById('removeCover');
+      removeCover.addEventListener('click', function () {
+         const coverQuantity = document.getElementById('coverQuantity').value;
+         let totalCoverQuantity = parseInt(coverQuantity);
+         totalCoverQuantity--;
+         document.getElementById('coverQuantity').value = totalCoverQuantity;
+
+         if (totalCoverQuantity < 0) {
+            return totalCoverQuantity;
+         } 
+         else {
+            const coverPrice = document.getElementById('coverPrice').innerText;
+            let totalCoverPrice = parseInt(coverPrice);
+            const finalCoverPrice = totalCoverQuantity * -59;
+            document.getElementById('coverPrice').innerText = finalCoverPrice;
+
+
+            const subTotal = document.getElementById('subTotal').innerText;
+            const overallSubTotal = parseInt(subTotal);
+            let finalOverallSubTotal = overallSubTotal - 59;
+            document.getElementById('subTotal').innerText = finalOverallSubTotal;
+
+            const taxAmount = document.getElementById('taxAmount').innerText;
+            const totalTaxAmount = parseFloat(taxAmount);
+            const finalTaxAmount = finalOverallSubTotal * 0.015;
+            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
+
+
+            const totalAmount = document.getElementById('totalAmount').innerText;
+            const floatTotal = parseFloat(totalAmount);
+            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
+            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+         }
+      })
+   </script>
+</body>
+
+</html>

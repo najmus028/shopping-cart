@@ -12,7 +12,28 @@
 
 <body>
 
-   <section>
+   <section id="loginPage">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-4">
+
+            </div>
+            <div class="col-lg-4">
+               <div id="loginArea">
+                  <h5 class="mb-5">Welcome to Cart Calculation</h5>
+                  <input type="text" name="" id="" class="form-control mb-3" placeholder="Please Enter Your Username">
+                  <input type="password" name="" id="" class="form-control mb-5" placeholder="Please Enter Your Password">
+                  <button id="loginBtn">Login</button>
+               </div>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <section id="productPage">
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
@@ -79,6 +100,50 @@
    </section>
 
    <script>
+      const loginBtn = document.getElementById('loginBtn');
+      loginBtn.addEventListener('click',function(){
+         const loginPage = document.getElementById('loginPage');
+         loginPage.style.display = 'none';
+
+         const productPage = document.getElementById('productPage');
+         productPage.style.display = 'block';
+      })
+
+
+      if(phoneQuantity.value==='0'){
+         phoneQuantity.setAttribute('disabled','')
+      }else{
+         phoneQuantity.removeAttribute('disabled')
+      }
+
+      if(coverQuantity.value==='0'){
+         coverQuantity.setAttribute('disabled','')
+      }else{
+         coverQuantity.removeAttribute('disabled')
+      }
+
+      function checkOut(subTotalCalculation, taxCalculation){
+
+            // Subtotal Calculation
+            const subTotal = document.getElementById('subTotal').innerText;
+            const overallSubTotal = parseInt(subTotal);
+            const finalOverallSubTotal = overallSubTotal + subTotalCalculation;
+            document.getElementById('subTotal').innerText = finalOverallSubTotal;
+
+            // Tax calculation 
+            const taxAmount = document.getElementById('taxAmount').innerText;
+            const totalTaxAmount = parseFloat(taxAmount);
+            const finalTaxAmount = finalOverallSubTotal * taxCalculation;
+            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(3);
+
+            // total Amount Calculation 
+            const totalAmount = document.getElementById('totalAmount').innerText;
+            const floatTotal = parseFloat(totalAmount);
+            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
+            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(3);
+      }
+
+      
       // Add Phone to the cart
       const addButtonPhone = document.getElementById('addButtonPhone');
       addButtonPhone.addEventListener('click', function () {
@@ -96,20 +161,7 @@
             const finalPhonePrice = totalPhonePrice + 1219;
             document.getElementById('phonePrice').innerText = finalPhonePrice;
 
-            const subTotal = document.getElementById('subTotal').innerText;
-            const overallSubTotal = parseInt(subTotal);
-            const finalOverallSubTotal = overallSubTotal + 1219;
-            document.getElementById('subTotal').innerText = finalOverallSubTotal;
-
-            const taxAmount = document.getElementById('taxAmount').innerText;
-            const totalTaxAmount = parseFloat(taxAmount);
-            const finalTaxAmount = finalOverallSubTotal * 0.015;
-            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(3);
-
-            const totalAmount = document.getElementById('totalAmount').innerText;
-            const floatTotal = parseFloat(totalAmount);
-            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
-            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(3);
+            checkOut(1219, 0.015);            
          }
       })
 
@@ -130,21 +182,7 @@
             let finalPhonePrice = totalPhonePrice - 1219;
             document.getElementById('phonePrice').innerText = finalPhonePrice;
 
-
-            const subTotal = document.getElementById('subTotal').innerText;
-            const overallSubTotal = parseInt(subTotal);
-            const finalOverallSubTotal = overallSubTotal - 1219;
-            document.getElementById('subTotal').innerText = finalOverallSubTotal;
-
-            const taxAmount = document.getElementById('taxAmount').innerText;
-            const totalTaxAmount = parseFloat(taxAmount);
-            const finalTaxAmount = finalOverallSubTotal * 0.015;
-            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
-
-            const totalAmount = document.getElementById('totalAmount').innerText;
-            const floatTotal = parseFloat(totalAmount);
-            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
-            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+            checkOut(-1219, 0.015); 
          }
 
       })
@@ -166,22 +204,7 @@
             const finalCoverPrice = totalCoverPrice + 59;
             document.getElementById('coverPrice').innerText = finalCoverPrice;
 
-
-            const subTotal = document.getElementById('subTotal').innerText;
-            const overallSubTotal = parseInt(subTotal);
-            const finalOverallSubTotal = overallSubTotal + 59;
-            document.getElementById('subTotal').innerText = finalOverallSubTotal;
-
-            const taxAmount = document.getElementById('taxAmount').innerText;
-            const totalTaxAmount = parseFloat(taxAmount);
-            const finalTaxAmount = finalOverallSubTotal * 0.015;
-            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
-
-
-            const totalAmount = document.getElementById('totalAmount').innerText;
-            const floatTotal = parseFloat(totalAmount);
-            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
-            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+            checkOut(59, 0.015); 
          }
       })
 
@@ -199,27 +222,14 @@
          else {
             const coverPrice = document.getElementById('coverPrice').innerText;
             let totalCoverPrice = parseInt(coverPrice);
-            const finalCoverPrice = totalCoverQuantity * -59;
+            const finalCoverPrice = totalCoverPrice - 59;
             document.getElementById('coverPrice').innerText = finalCoverPrice;
 
-
-            const subTotal = document.getElementById('subTotal').innerText;
-            const overallSubTotal = parseInt(subTotal);
-            let finalOverallSubTotal = overallSubTotal - 59;
-            document.getElementById('subTotal').innerText = finalOverallSubTotal;
-
-            const taxAmount = document.getElementById('taxAmount').innerText;
-            const totalTaxAmount = parseFloat(taxAmount);
-            const finalTaxAmount = finalOverallSubTotal * 0.015;
-            document.getElementById('taxAmount').innerText = finalTaxAmount.toFixed(2);
-
-
-            const totalAmount = document.getElementById('totalAmount').innerText;
-            const floatTotal = parseFloat(totalAmount);
-            const finalTotalAmount = finalOverallSubTotal + finalTaxAmount;
-            document.getElementById('totalAmount').innerText = finalTotalAmount.toFixed(2);
+            checkOut(-59, 0.015); 
          }
       })
+
+
    </script>
 </body>
 

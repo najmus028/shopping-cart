@@ -1,6 +1,33 @@
 body{
 	background: #fff;
 }
+
+#loginArea{
+	text-align: center;
+	box-shadow: 5px 5px 10px gray;
+	margin-top: 100px;
+	padding: 70px 20px;
+	border-radius: 8px;
+	background-color: darkslategray;
+	color: white;
+}
+
+#loginBtn{
+	padding: 5px 10px;
+	border: none;
+	background-color: white;
+	border-radius: 5px;
+	color: darkslategray;
+	transition: all linear .3s;
+}
+#loginBtn:hover{
+	background-color: darkslategray;
+	color: white;
+	transition: all linear .3s;
+	border: 1px solid white;
+	cursor: pointer;
+}
+
 .cart{
 	margin: 100px 0;
 	background-color: #F6F5FA;;
@@ -52,5 +79,9 @@ body{
 	font-size: 19px;
 	background-color: #2FBE70;
 	border: none;
+}
+
+#productPage{
+	display: none;
 }
 
